@@ -3,16 +3,27 @@ const stateDefault = {
 }
 
 
+
 export const QuanLySinhVienReducer = (state = stateDefault, action) => {
+
     switch(action.type){
         case 'THEM_SINH_VIEN':{
-            const mangSVUpdate = [...state.mangSinhVien,action.sinhVien];
-            state.mangSinhVien = mangSVUpdate;
-            console.log(action)
-            return{...state};
+
+            //clone state
+            let newState = {...state};
+            let mangSVUpdate =  [...newState.mangSinhVien];
+            const sinhVien = {...action.sinhVien};
+            mangSVUpdate.push(sinhVien);
+
+            //Update state
+            newState.mangSinhVien = mangSVUpdate;
+
+            return newState;
         };break;
+
         default: {
-            return{...state};
-        }
+            return {...state};
+        };break;
     }
+
 } 
